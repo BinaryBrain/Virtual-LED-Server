@@ -2,11 +2,11 @@ const dgram = require('dgram');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const LedManager = require('./ledManager.js');
+const VirtualLedManager = require('./virtualLedManager.js');
 
 const LED_NB = ledNb(300);
 const PIN = 18;
-const ledManager = new LedManager(LED_NB, PIN, 'grb');
+const ledManager = new VirtualLedManager(LED_NB, PIN, 'grb');
 
 function runUdpServer() {
     const server = dgram.createSocket('udp4');

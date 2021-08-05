@@ -1,0 +1,26 @@
+{
+  "name": "Virtual-LED-Server",
+  "version": "1.0.0",
+  "description": "This is an express server that exposes an API to drive virtual RGBW LED strips in your browser.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BinaryBrain/Virtual-LED-Server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BinaryBrain/Virtual-LED-Server/issues"
+  },
+  "homepage": "https://github.com/BinaryBrain/Virtual-LED-Server#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-ws": "^5.0.2"
+  }
+}

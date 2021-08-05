@@ -1,18 +1,12 @@
-# Rpi-SK6812-ws2812b-RGBW-http-server
+# Virtual LED Server
 
-This is an express server that exposes an API to drive SK6812/ws2812b RGBW LED strips on a Raspberry Pi
+This is an express server that exposes an API to drive virtual RGBW LED strips in your browser.
 
-## Hardware Install
-
-1. Plug the +5V and GND in an external power supply.
-
-2. Plug the DATA and GND in your Raspberry Pi.
-
-3. The default data pin is GPIO18 (which is #12 on the circuit board).
+It can be used as a dummy server for [Rpi-SK6812-ws2812b-RGBW-http-server](https://github.com/BinaryBrain/Rpi-SK6812-ws2812b-RGBW-http-server).
 
 ## Software Install
 
-Just run the server with:
+Run the server with:
 
 ```sh
 npm install

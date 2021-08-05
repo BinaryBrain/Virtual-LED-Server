@@ -1,6 +1,6 @@
-const ws281x = require('rpi-ws281x');
+const VirutalLeds = require('./virtualLeds.js');
 
-class LedManager {
+class VirtualLedManager {
     constructor(LED_NB, PIN, type) {
         this.type = type;
         this.LED_NB = LED_NB;
@@ -9,7 +9,7 @@ class LedManager {
         this.config.brightness = 255;
         this.config.gpio = PIN;
         this.config.strip = 'rgb';
-        ws281x.configure(this.config);
+        VirutalLeds.configure(this.config);
     }
 
     // FORMAT: ["FFAA66", "FFAA66FF"]
@@ -42,7 +42,7 @@ class LedManager {
         const pixels = this.translate(colorArray);
 
         // Render to strip
-        ws281x.render(pixels);
+        VirutalLeds.render(pixels);
     }
 
     // FORMAT: [{r: 255, g: 255, b: 255, w?: 255}]
@@ -63,15 +63,15 @@ class LedManager {
         const pixels = this.translate(colorArray);
 
         // Render to strip
-        ws281x.render(pixels);
+        VirutalLeds.render(pixels);
     }
 
     renderBytes (bytes) {
-        ws281x.render(bytes);
+        VirutalLeds.render(bytes);
     }
 
     renderArray (array) {
-        ws281x.render(this.translate(array));
+        VirutalLeds.render(this.translate(array));
     }
 
     translate (array) {
@@ -121,4 +121,4 @@ class LedManager {
     }
 };
 
-module.exports = LedManager;
+module.exports = VirtualLedManager;
