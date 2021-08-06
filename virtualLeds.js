@@ -6,7 +6,7 @@ const app = new express();
 const expressWs = expressWsWrapper(app);
 let wsClients = [];
 let config;
-let pixels;
+let colors;
 
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'static', 'index.html'));
@@ -26,10 +26,12 @@ expressWs.app.ws('/', (ws) => {
                     cmd: "configure",
                     data: config
                 }));
+            }
 
+            if (colors) {
                 ws.send(JSON.stringify({
                     cmd: "render",
-                    data: pixels
+                    data: colors
                 }));
             }
         }
@@ -56,12 +58,12 @@ const VirutalLeds = {
             data: config
         });
     },
-    render: (newPixels) => {
-        pixels = newPixels;
+    render: (newColors) => {
+        colors = newColors;
 
         broadcast({
             cmd: "render",
-            data: pixels
+            data: colors
         });
     }
 }

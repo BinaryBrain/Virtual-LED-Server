@@ -4,9 +4,8 @@ const bodyParser = require('body-parser');
 
 const VirtualLedManager = require('./virtualLedManager.js');
 
-const LED_NB = ledNb(300);
-const PIN = 18;
-const ledManager = new VirtualLedManager(LED_NB, PIN, 'grb');
+const LED_NB = 80;
+const ledManager = new VirtualLedManager(LED_NB);
 
 function runUdpServer() {
     const server = dgram.createSocket('udp4');
@@ -27,7 +26,7 @@ function runUdpServer() {
                 ledManager.renderArray(colorArray);
             } else if (msg.readUInt8() === 4) {
                 // Binary RGBW
-                ledManager.renderArray(msg.slice(1, msg.length));
+                ledManager.renderArray(Array.from(msg.slice(1, msg.length)));
             } else if (msg.toString('utf-8', 0, 1) === '{') {
                 // JSON
                 changeLeds(JSON.parse(msg.toString('utf-8')).colors);

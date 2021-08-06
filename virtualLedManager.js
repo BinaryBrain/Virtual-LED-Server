@@ -1,13 +1,12 @@
 const VirutalLeds = require('./virtualLeds.js');
 
 class VirtualLedManager {
-    constructor(LED_NB, PIN, type) {
-        this.type = type;
+    constructor(LED_NB) {
+        this.type = 'rgb';
         this.LED_NB = LED_NB;
         this.config = {};
         this.config.leds = LED_NB;
         this.config.brightness = 255;
-        this.config.gpio = PIN;
         this.config.strip = 'rgb';
         VirutalLeds.configure(this.config);
     }
@@ -39,10 +38,8 @@ class VirtualLedManager {
             colorArray.push(r, g, b, w);
         }
 
-        const pixels = this.translate(colorArray);
-
         // Render to strip
-        VirutalLeds.render(pixels);
+        VirutalLeds.render(colorArray);
     }
 
     // FORMAT: [{r: 255, g: 255, b: 255, w?: 255}]
@@ -60,10 +57,8 @@ class VirtualLedManager {
             colorArray.push(color.w);
         }
 
-        const pixels = this.translate(colorArray);
-
         // Render to strip
-        VirutalLeds.render(pixels);
+        VirutalLeds.render(colorArray);
     }
 
     renderBytes (bytes) {
@@ -71,53 +66,7 @@ class VirtualLedManager {
     }
 
     renderArray (array) {
-        VirutalLeds.render(this.translate(array));
-    }
-
-    translate (array) {
-        if (this.type === 'rgb') {
-            return this.translateRGBW(array);
-        } else {
-            return this.translateGRBW(array);
-        }
-    }
-
-    translateRGBW (array) {
-        const newArray = new Uint32Array(this.LED_NB);
-
-        for (let i = 0; i < array.length; i = i + 3) {
-            const j = i / 3;
-            newArray[j] = ((array[i] << 16) | (array[i+1] << 8) | (array[i+2]))
-        }
-
-        return newArray;
-    }
-
-    translateGRBW (array) {
-        const newArray = new Uint32Array(this.LED_NB);
-
-        for (let i = 0; i < array.length; i = i + 3) {
-            const j = i / 3;
-            const nLed = j % 4;
-
-            // Science
-            switch (nLed) {
-                case 0:
-                    newArray[j] = ((array[i+1] << 16) | (array[i] << 8) | (array[i+2]));
-                    break;
-                case 1:
-                    newArray[j] = ((array[i] << 16) | (array[i+2] << 8) | (array[i+1]));
-                    break;
-                case 2:
-                    newArray[j] = ((array[i] << 16) | (array[i+1] << 8) | (array[i+3]));
-                    break;
-                case 3:
-                    newArray[j] = ((array[i-1] << 16) | (array[i+1] << 8) | (array[i+2]));
-                    break;
-            }
-        }
-
-        return newArray;
+        VirutalLeds.render(array);
     }
 };
 
