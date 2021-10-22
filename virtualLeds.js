@@ -12,15 +12,19 @@ app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'static', 'index.html'));
 });
 
+app.get('/light', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'static', 'light.html'));
+});
+
 app.use('/static', express.static(__dirname + '/static'));
 
 expressWs.app.ws('/', (ws) => {
     ws.on('message', (data) => {
         const msg = JSON.parse(data.toString());
-        
+
         if (msg.cmd === "hi") {
             wsClients.push(ws);
-            
+
             if (config) {
                 ws.send(JSON.stringify({
                     cmd: "configure",
