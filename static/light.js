@@ -1,10 +1,10 @@
 const ws = new WebSocket("ws://" + location.host + "/");
-let NB_LED = 20;
+let NB_LED = 100;
 const colors = [];
 
 const leds = [];
 
-const CIRCLE_RADIUS = 250;
+const CIRCLE_RADIUS = 200;
 
 ws.onmessage = (evt) => {
     const msg = evt.data
@@ -35,21 +35,22 @@ ws.addEventListener('open', (event) => {
 });
 
 function render(newColors) {
-    /*
+    gotData();
     for (let i = 0; i < newColors.length; i += 4) {
-         [i / 4] = {
+         colors[i / 4] = {
             r: newColors[i],
             g: newColors[i + 1],
             b: newColors[i + 2],
             w: newColors[i + 3],
         }
-
-        if (lights[i / 4]) {
-            lights[i / 4].color = colors[i / 4];
-            lightsMats[i / 4].emissive = colors[i / 4];
-        }
     }
-     */
+}
+
+function gotData() {
+    const div = document.getElementById("noData");
+    if (div) {
+        div.remove();
+    }
 }
 
 function configure(config) {
@@ -66,8 +67,8 @@ let container;
 init();
 
 function init() {
-
-    app = new PIXI.Application({ backgroundColor: 0x1099bb });
+    app = new PIXI.Application({ backgroundColor: 0x111111, width: 600, height: 600 });
+    document.getElementById('webgl').style = "backgroundColor: #111111;";
     document.getElementById('webgl').appendChild(app.view);
 
     container = new PIXI.Container();
@@ -81,8 +82,8 @@ function init() {
     for (let i = 0; i < NB_LED; i++) {
         const led = new PIXI.Sprite(texture);
         const led_percent = i / NB_LED;
-        const led_rad = 2 *led_percent * Math.PI;
-        led.x = 400 + Math.cos(led_rad) * CIRCLE_RADIUS;
+        const led_rad = 2 * led_percent * Math.PI;
+        led.x = 300 + Math.cos(led_rad) * CIRCLE_RADIUS;
         led.y = 300 + Math.sin(led_rad) * CIRCLE_RADIUS;
         led.rotation = led_rad;
         leds[i] = led;
@@ -119,8 +120,43 @@ function animate() {
 
     for (let i = 0; i < NB_LED; i++) {
         const led = leds[i];
-        // led.rotation += 0.05;
+        const color = colors[i];
+        let value = 0x000000;
+
+        if (!color) {
+            return;
+        }
+
+        value += color.b;
+        value += color.g * 0x100;
+        value += color.r * 0x10000;
+
+        if (!led) {
+            return;
+        }
+
+        led.blendMode = 1;
+        led.tint = value;
     }
 
     app.renderer.render(container);
 }
+
+function resize() {
+    let w;
+    let h;
+    const ratio = 1;
+    if (window.innerWidth / window.innerHeight >= ratio) {
+        w = window.innerHeight * ratio;
+        h = window.innerHeight;
+    } else {
+        w = window.innerWidth;
+        h = window.innerWidth / ratio;
+    }
+    app.renderer.view.style.width = w + 'px';
+    app.renderer.view.style.height = h + 'px';
+}
+window.onresize = resize;
+resize();
+
+document.getElementById('title').classList.add('disappearing');

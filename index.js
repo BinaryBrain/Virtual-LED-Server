@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const VirtualLedManager = require('./virtualLedManager.js');
 
-const LED_NB = 80;
+const LED_NB = 300;
 const ledManager = new VirtualLedManager(LED_NB);
 
 function runUdpServer() {
