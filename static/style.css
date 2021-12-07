@@ -75,3 +75,12 @@ body {
 .appearing {
     animation: appear 2s ease-in-out;
 }
+
+.light2 #circle {
+    position: absolute;
+    margin: auto;
+}
+
+.light2 .led {
+    position: absolute;
+}

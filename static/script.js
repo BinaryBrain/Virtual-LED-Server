@@ -72,10 +72,6 @@ function configure(config) {
         const lightGeometry = new THREE.PlaneGeometry(ledWidth, ledHeight);
         lights[i].add(new THREE.Mesh(lightGeometry, lightsMats[i]));
 
-        const c = { r: Math.random() * 100, g: Math.random() * 100, b: Math.random() * 100 };
-        lights[i].color = c;
-        lightsMats[i].emissive = c;
-
         lights[i].position.sub(circleCenter);
         lights[i].position.applyAxisAngle(axis, angle);
         lights[i].position.add(circleCenter);

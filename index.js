@@ -1,10 +1,13 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const dgram = require('dgram');
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const VirtualLedManager = require('./virtualLedManager.js');
 
-const LED_NB = 300;
+const LED_NB = process.env.NB_LED;
 const ledManager = new VirtualLedManager(LED_NB);
 
 function runUdpServer() {

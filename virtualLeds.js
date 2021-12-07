@@ -16,6 +16,10 @@ app.get('/light', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'static', 'light.html'));
 });
 
+app.get('/light2', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'static', 'light2.html'));
+});
+
 app.use('/static', express.static(__dirname + '/static'));
 
 expressWs.app.ws('/', (ws) => {
