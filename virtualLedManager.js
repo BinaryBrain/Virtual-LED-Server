@@ -1,11 +1,11 @@
 const VirutalLeds = require('./virtualLeds.js');
 
 class VirtualLedManager {
-    constructor(LED_NB) {
+    constructor(NB_LED) {
         this.type = 'rgb';
-        this.LED_NB = LED_NB;
+        this.NB_LED = NB_LED;
         this.config = {};
-        this.config.leds = LED_NB;
+        this.config.leds = NB_LED;
         this.config.brightness = 255;
         this.config.strip = 'rgb';
         VirutalLeds.configure(this.config);
