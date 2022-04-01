@@ -8,6 +8,9 @@ const bodyParser = require('body-parser');
 const VirtualLedManager = require('./virtualLedManager.js');
 
 const NB_LED = process.env.NB_LED;
+if (NB_LED == null) {
+    throw new Error("NB_LED should be defined. Either pass it as an environment variable, or add it to the .env file.");
+}
 const ledManager = new VirtualLedManager(NB_LED);
 
 function runUdpServer() {
