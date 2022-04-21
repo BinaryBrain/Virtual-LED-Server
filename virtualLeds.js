@@ -67,6 +67,8 @@ const VirutalLeds = {
         });
     },
     render: (newColors) => {
+        colors = [];
+
         for (let i = 0; i < newColors.length; i++) {
             colors.push(newColors[i + 1]);
             colors.push(newColors[i]);
