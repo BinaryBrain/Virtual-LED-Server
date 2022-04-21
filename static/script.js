@@ -36,10 +36,10 @@ ws.addEventListener('open', (event) => {
 function render(newColors) {
     for (let i = 0; i < newColors.length; i += 4) {
         colors[i / 4] = {
-            r: newColors[i],
-            g: newColors[i + 1],
-            b: newColors[i + 2],
-            w: newColors[i + 3],
+            w: newColors[i],
+            r: newColors[i + 1],
+            g: newColors[i + 2],
+            b: newColors[i + 3],
         }
 
         if (lights[i / 4]) {
