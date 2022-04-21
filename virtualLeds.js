@@ -68,10 +68,10 @@ const VirutalLeds = {
     },
     render: (newColors) => {
         for (let i = 0; i < newColors.length; i++) {
-            colors.r = newColors.g;
-            colors.g = newColors.r;
-            colors.b = newColors.b;
-            colors.w = newColors.w;
+            colors.push(newColors[i + 1]);
+            colors.push(newColors[i]);
+            colors.push(newColors[i + 2]);
+            colors.push(newColors[i + 3]);
         }
 
         broadcast({
