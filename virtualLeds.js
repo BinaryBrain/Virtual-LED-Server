@@ -67,7 +67,12 @@ const VirutalLeds = {
         });
     },
     render: (newColors) => {
-        colors = newColors;
+        for (let i = 0; i < newColors.length; i++) {
+            colors.r = newColors.g;
+            colors.g = newColors.r;
+            colors.b = newColors.b;
+            colors.w = newColors.w;
+        }
 
         broadcast({
             cmd: "render",
