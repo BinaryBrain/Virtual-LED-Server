@@ -1,5 +1,11 @@
 # Virtual LED Server
 
+# :warning: **DEPRECATED** :warning:
+
+This whole tool is now part of https://github.com/BinaryBrain/Rpi-SK6812-ws2812b-RGBW-http-server
+
+<hr>
+
 This is an express server that exposes an API to drive virtual RGBW LED strips in your browser.
 
 It can be used as a dummy server for [Rpi-SK6812-ws2812b-RGBW-http-server](https://github.com/BinaryBrain/Rpi-SK6812-ws2812b-RGBW-http-server).
